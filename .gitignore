@@ -1,0 +1,13 @@
+# bases de datos
+*.db
+
+# logs
+*.log
+
+# python cache
+__pycache__/
+*.pyc
+
+# entorno virtual
+venv/
+.env
