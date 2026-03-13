@@ -164,6 +164,14 @@ pip install flask requests
 
 Primero ejecuta los scripts de creación de base de datos correspondientes.
 
+Ejecuta:
+
+```bash
+python crear_db.py
+```
+
+Recuerda que cada carpeta tiene su propio archivo crear_db.py.
+
 ### 3. Levantar los microservicios
 
 Ejecuta:
