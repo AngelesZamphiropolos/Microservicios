@@ -91,8 +91,6 @@ Se encarga de:
 3. Pagos llama a **Pedidos** para actualizar el estado de la orden.
 4. Pedidos cambia el estado del pedido a **`PAGADO`**.
 
-Ese pequeño baile ya muestra bastante bien cómo colaboran los microservicios cuando el sistema empieza a comportarse como sistema, y no solo como CRUD con esteroides.
-
 ---
 
 ## 🛠️ Tecnologías utilizadas
@@ -102,31 +100,6 @@ Ese pequeño baile ya muestra bastante bien cómo colaboran los microservicios c
 - **SQLite**
 - **requests** (para llamadas HTTP entre servicios)
 - **logging** (para registros de ejecución)
-
----
-
-## 📁 Estructura sugerida del proyecto
-
-Como los scripts de inicialización de base de datos fueron subidos con el mismo nombre (`crear_db.py`), la versión más ordenada del repositorio podría quedar así:
-
-```bash
-.
-├── app_catalogo.py
-├── app_pedido.py
-├── app_pago.py
-├── crear_catalogo_db.py
-├── crear_pedidos_db.py
-├── crear_pagos_db.py
-├── README.md
-├── catalogo.db
-├── pedidos.db
-├── pagos.db
-├── catalogos.log
-├── pedido.log
-└── pago.log
-```
-
-Si prefieres mantener el nombre original, lo ideal es colocar cada `crear_db.py` dentro de carpetas distintas para que no se sobrescriban entre sí.
 
 ---
 
@@ -177,13 +150,6 @@ El proyecto utiliza **Bearer Tokens** simples para la comunicación interna entr
 - `PEDIDOS_PAGOS`
 - `PAGOS_PEDIDOS`
 
-Para un proyecto académico o de práctica, esta solución funciona bien porque deja claras las fronteras entre servicios.
-
-En un sistema de producción, estos valores deberían moverse a:
-- variables de entorno,
-- un gestor de secretos,
-- o un mecanismo más robusto como OAuth2, JWT o identidad de servicio.
-
 ---
 
 ## ▶️ Cómo ejecutar el proyecto
@@ -198,19 +164,9 @@ pip install flask requests
 
 Primero ejecuta los scripts de creación de base de datos correspondientes.
 
-Si decides renombrarlos:
-
-```bash
-python crear_catalogo_db.py
-python crear_pedidos_db.py
-python crear_pagos_db.py
-```
-
-Si mantienes el mismo nombre, asegúrate de guardar cada uno en carpetas distintas antes de ejecutarlos.
-
 ### 3. Levantar los microservicios
 
-Abre **tres terminales** y ejecuta:
+Ejecuta:
 
 ```bash
 python app_catalogo.py
@@ -326,65 +282,6 @@ Cada servicio genera su propio archivo de log:
 - `pedido.log`
 - `pago.log`
 
-Esto facilita el debugging y le da al proyecto una estructura mucho más realista de backend.
+Esto facilita el debugging.
 
 ---
-
-## ✅ Qué demuestra bien este proyecto
-
-Este proyecto es especialmente fuerte como pieza de portafolio porque muestra:
-
-- separación de responsabilidades,
-- diseño de endpoints REST,
-- comunicación entre servicios,
-- validación y manejo de errores,
-- lógica de reserva de stock,
-- persistencia con bases de datos independientes,
-- pensamiento backend práctico más allá de una app CRUD básica.
-
-En otras palabras: no es solo “hice tres endpoints”. Ya empieza a pensar como sistema.
-
----
-
-## 🚧 Posibles mejoras
-
-Si quisieras llevar este proyecto a un nivel aún más sólido, estos serían muy buenos siguientes pasos:
-
-- mover tokens y URLs a **variables de entorno**,
-- agregar **Docker / Docker Compose**,
-- incluir un **requirements.txt**,
-- organizar cada servicio dentro de su propia carpeta,
-- agregar **tests unitarios** y **tests de integración**,
-- usar **SQLAlchemy** en lugar de consultas SQLite directas,
-- añadir documentación con **Swagger / OpenAPI**,
-- implementar lógica de **rollback o compensación** si se reserva stock pero falla la creación del pedido,
-- agregar más transiciones de estado como `PENDIENTE`, `PAGADO`, `CANCELADO`,
-- reemplazar la aprobación fija del pago por una simulación más realista.
-
-Ese último punto importa bastante, porque los sistemas distribuidos tienen una afición sospechosa por romperse de formas creativas a las 2 de la mañana.
-
----
-
-## 🎯 Por qué este repositorio tiene valor
-
-Este repositorio es una muy buena pieza académica y de portafolio porque combina:
-
-- desarrollo backend,
-- modelado de base de datos,
-- desarrollo de APIs,
-- comunicación entre servicios,
-- y modelado de lógica de negocio.
-
-Demuestra que no solo sabes crear endpoints, sino también pensar en **flujo, consistencia, límites del sistema y comportamiento del dominio**.
-
----
-
-## 👩‍💻 Autor
-
-Desarrollado como proyecto de aprendizaje enfocado en backend, microservicios, Flask, SQLite y diseño orientado a servicios.
-
----
-
-## 📌 Nota final
-
-Este proyecto es lo bastante simple como para entenderse rápido, pero también lo bastante estructurado como para mostrar bases sólidas de backend. Y ese equilibrio es oro puro para un repositorio de GitHub: accesible, demostrable y técnicamente honesto.
